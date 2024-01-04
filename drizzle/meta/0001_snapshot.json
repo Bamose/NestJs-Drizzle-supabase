@@ -1,0 +1,53 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "id": "db93b211-0ca7-4995-ba5c-a09b9c8698f8",
+  "prevId": "990cc030-c2d0-464e-aaa7-665c52541061",
+  "tables": {
+    "user": {
+      "name": "user",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    }
+  },
+  "enums": {
+    "types": {
+      "name": "types",
+      "values": {
+        "FOOD": "FOOD",
+        "MATERIAL": "MATERIAL",
+        "OTHER": "OTHER"
+      }
+    },
+    "roles": {
+      "name": "roles",
+      "values": {
+        "ADMIN": "ADMIN",
+        "USER": "USER"
+      }
+    }
+  },
+  "schemas": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  }
+}
