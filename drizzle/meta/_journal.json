@@ -15,6 +15,13 @@
       "when": 1704465993422,
       "tag": "0001_lyrical_sunspot",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1704473904033,
+      "tag": "0002_powerful_magma",
+      "breakpoints": true
     }
   ]
 }

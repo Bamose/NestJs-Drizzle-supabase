@@ -11,39 +11,39 @@ import {
   UseFilters,
   UseInterceptors,
 } from '@nestjs/common';
-import { User } from 'src/drizzle/schema/schema';
+import { users } from 'src/drizzle/schema/userschema';
 import { UsersService } from './users.service';
 
 @Controller('users')
-export class UsersController {
+export class usersController {
   constructor(private readonly userService: UsersService) {}
 
   @Get()
-  async findAll(): Promise<User[]> {
+  async findAll() {
     return this.userService.findAll();
   }
 
-  @Get('/:id')
-  async findUserById(@Param('id') id): Promise<User> {
-    return this.userService.findUserById(id);
+  /*   @Get('/:id')
+  async finduserById(@Param('id') id): Promise<user> {
+    return this.userService.finduserById(id);
   }
 
   @Delete('/:id')
-  async deleteUserById(@Param('id') id): Promise<User[]> {
-    return this.userService.deleteUser(id);
+  async deleteuserById(@Param('id') id): Promise<user[]> {
+    return this.userService.deleteuser(id);
   }
 
   @Patch('/:id')
-  async patchUserById(@Param('id') id, @Body() user: User): Promise<User[]> {
-    return this.userService.patchUser(id, user);
+  async patchuserById(@Param('id') id, @Body() user: user): Promise<user[]> {
+    return this.userService.patchuser(id, user);
   }
 
   @Put('/:id')
-  async updateUserById(@Param('id') id, @Body() user: User): Promise<User[]> {
-    return this.userService.updateUser(id, user);
+  async updateuserById(@Param('id') id, @Body() user: user): Promise<user[]> {
+    return this.userService.updateuser(id, user);
   }
   @Post()
-  async createUser(@Body() user: User): Promise<User[]> {
-    return this.userService.createUser(user);
-  }
+  async createuser(@Body() user: user): Promise<user[]> {
+    return this.userService.createuser(user);
+  } */
 }

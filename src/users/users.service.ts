@@ -1,22 +1,22 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { PG_CONNECTION } from '../../constants';
 import { NodePgDatabase } from 'drizzle-orm/node-postgres';
-import * as schema from '../drizzle/schema/schema';
-import { User, user, NewUser } from '../drizzle/schema/schema';
+import * as user from 'src/drizzle/schema/userschema';
+import { users } from 'src/drizzle/schema/userschema';
 import { eq } from 'drizzle-orm';
 
 @Injectable()
 export class UsersService {
   constructor(
-    @Inject(PG_CONNECTION) private conn: NodePgDatabase<typeof schema>,
+    @Inject(PG_CONNECTION) private conn: NodePgDatabase<typeof user>,
   ) {}
 
-  public async findAll(): Promise<User[]> {
-    return await this.conn.select().from(user);
+  public async findAll() {
+    return await this.conn.select().from(users);
   }
-
-  public async findUserById(id: number): Promise<User> {
-    return await this.conn.query.user.findFirst({
+  /*
+  public async findUserById(id: number) {
+    return await this.conn.query.users.findFirst({
       where: eq(user.id, id),
     });
   }
@@ -37,5 +37,5 @@ export class UsersService {
   public async deleteUser(id: number): Promise<User[]> {
     await this.conn.delete(user).where(eq(user.id, id));
     return this.findAll();
-  }
+  } */
 }

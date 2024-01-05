@@ -1,7 +1,7 @@
 import { relations } from 'drizzle-orm';
 import { pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core';
 import { token } from './tokenschema';
-
+import { event } from './eventschema';
 export const users = pgTable('users', {
   id: serial('id').primaryKey(),
   name: text('name').notNull(),
@@ -14,4 +14,8 @@ export const users = pgTable('users', {
 });
 export const userRelations = relations(users, ({ many }) => ({
   token: many(token),
+}));
+
+export const eventRelations = relations(users, ({ many }) => ({
+  event: many(event),
 }));

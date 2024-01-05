@@ -1,4 +1,14 @@
-import { date, pgTable, serial, text, time } from 'drizzle-orm/pg-core';
+import { relations } from 'drizzle-orm';
+import {
+  date,
+  integer,
+  pgTable,
+  serial,
+  text,
+  time,
+} from 'drizzle-orm/pg-core';
+import { users } from './userschema';
+import { registration } from './registrationschema';
 
 export const event = pgTable('event', {
   id: serial('id').primaryKey(),
@@ -8,4 +18,16 @@ export const event = pgTable('event', {
   time: time('time'),
   location: text('location'),
   organisedBy: text('organisedBy'),
+  userId: integer('userId'),
 });
+
+export const eventRelations = relations(event, ({ one }) => ({
+  user: one(users, {
+    fields: [event.userId],
+    references: [users.id],
+  }),
+}));
+
+export const registrationRelations = relations(event, ({ many }) => ({
+  registration: many(registration),
+}));

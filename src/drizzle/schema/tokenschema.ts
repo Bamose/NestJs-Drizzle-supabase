@@ -22,7 +22,7 @@ export const token = pgTable('token', {
 });
 
 export const tokenRelations = relations(token, ({ one }) => ({
-  author: one(users, {
+  user: one(users, {
     fields: [token.userId],
     references: [users.id],
   }),
