@@ -11,7 +11,7 @@ import {
   UseFilters,
   UseInterceptors,
 } from '@nestjs/common';
-import { User } from 'src/drizzle/schema';
+import { User } from 'src/drizzle/schema/schema';
 import { UsersService } from './users.service';
 
 @Controller('users')

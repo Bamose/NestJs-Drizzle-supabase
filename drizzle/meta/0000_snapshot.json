@@ -1,11 +1,11 @@
 {
   "version": "5",
   "dialect": "pg",
-  "id": "990cc030-c2d0-464e-aaa7-665c52541061",
+  "id": "995cbd37-8778-4020-88bf-2af7753533c9",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
-    "inventory": {
-      "name": "inventory",
+    "department": {
+      "name": "department",
       "schema": "",
       "columns": {
         "id": {
@@ -16,18 +16,6 @@
         },
         "name": {
           "name": "name",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "dayNum": {
-          "name": "dayNum",
-          "type": "smallint",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "time": {
-          "name": "time",
           "type": "text",
           "primaryKey": false,
           "notNull": false
@@ -38,8 +26,8 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "item": {
-      "name": "item",
+    "event": {
+      "name": "event",
       "schema": "",
       "columns": {
         "id": {
@@ -48,27 +36,198 @@
           "primaryKey": true,
           "notNull": true
         },
-        "name": {
-          "name": "name",
+        "eventname": {
+          "name": "eventname",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "description": {
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "date": {
+          "name": "date",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "time": {
+          "name": "time",
+          "type": "time",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "location": {
+          "name": "location",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "organisedBy": {
+          "name": "organisedBy",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "member": {
+      "name": "member",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "firstname": {
+          "name": "firstname",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "lastName": {
+          "name": "lastName",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "emaol": {
+          "name": "emaol",
           "type": "text",
           "primaryKey": false,
           "notNull": true
         },
-        "quantity": {
-          "name": "quantity",
-          "type": "smallint",
+        "phoheNumber": {
+          "name": "phoheNumber",
+          "type": "text",
           "primaryKey": false,
           "notNull": false
         },
-        "types": {
-          "name": "types",
-          "type": "types",
+        "timestamp": {
+          "name": "timestamp",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "departmentName": {
+          "name": "departmentName",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "profile": {
+      "name": "profile",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "bio": {
+          "name": "bio",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "timestamp": {
+          "name": "timestamp",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "registration": {
+      "name": "registration",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "regstatus": {
+          "name": "regstatus",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "timestamp": {
+          "name": "timestamp",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "token": {
+      "name": "token",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "timestamp": {
+          "name": "timestamp",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "otp/api": {
+          "name": "otp/api",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "emailtoken": {
+          "name": "emailtoken",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
-        "inventory_id": {
-          "name": "inventory_id",
-          "type": "integer",
+        "valid": {
+          "name": "valid",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": true
+        },
+        "expiration": {
+          "name": "expiration",
+          "type": "time",
           "primaryKey": false,
           "notNull": false
         }
@@ -92,13 +251,7 @@
           "name": "name",
           "type": "text",
           "primaryKey": false,
-          "notNull": false
-        },
-        "surname": {
-          "name": "surname",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "password": {
           "name": "password",
@@ -114,37 +267,16 @@
         },
         "roles": {
           "name": "roles",
-          "type": "roles",
+          "type": "text",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
         },
-        "created_at": {
-          "name": "created_at",
+        "timestamp": {
+          "name": "timestamp",
           "type": "timestamp",
           "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
-        },
-        "updated_At": {
-          "name": "updated_At",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
-        },
-        "general": {
-          "name": "general",
-          "type": "boolean",
-          "primaryKey": false,
           "notNull": false,
-          "default": false
-        },
-        "other": {
-          "name": "other",
-          "type": "boolean",
-          "primaryKey": false,
-          "notNull": false,
-          "default": false
+          "default": "now()"
         }
       },
       "indexes": {},
@@ -161,23 +293,7 @@
       }
     }
   },
-  "enums": {
-    "types": {
-      "name": "types",
-      "values": {
-        "FOOD": "FOOD",
-        "MATERIAL": "MATERIAL",
-        "OTHER": "OTHER"
-      }
-    },
-    "roles": {
-      "name": "roles",
-      "values": {
-        "ADMIN": "ADMIN",
-        "USER": "USER"
-      }
-    }
-  },
+  "enums": {},
   "schemas": {},
   "_meta": {
     "schemas": {},
