@@ -9,8 +9,8 @@ export const users = pgTable('users', {
   email: text('email').unique().notNull(),
   role: text('roles'),
   member: text('member'),
-  createdAt: timestamp('timestamp').defaultNow(),
-  updatedAt: timestamp('timestamp').defaultNow(),
+  createdAt: timestamp('createdAt').defaultNow(),
+  updatedAt: timestamp('updatedAt').defaultNow(),
 });
 export const userRelations = relations(users, ({ many }) => ({
   token: many(token),

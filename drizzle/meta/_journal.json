@@ -5,22 +5,8 @@
     {
       "idx": 0,
       "version": "5",
-      "when": 1704464073773,
-      "tag": "0000_exotic_jocasta",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "5",
-      "when": 1704465993422,
-      "tag": "0001_lyrical_sunspot",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "5",
-      "when": 1704473904033,
-      "tag": "0002_powerful_magma",
+      "when": 1704489091811,
+      "tag": "0000_brainy_nemesis",
       "breakpoints": true
     }
   ]

@@ -4,7 +4,7 @@ import { member } from './memberschema';
 export const profile = pgTable('profile', {
   id: serial('id').primaryKey(),
   bio: text('bio'),
-  createdAt: timestamp('timestamp').defaultNow(),
-  updatedAt: timestamp('timestamp').defaultNow(),
+  createdAt: timestamp('createdAt').defaultNow(),
+  updatedAt: timestamp('updatedAt').defaultNow(),
   memberId: integer('memberid').references(() => member.id),
 });

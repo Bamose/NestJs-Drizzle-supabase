@@ -12,8 +12,8 @@ import { users } from './userschema';
 
 export const token = pgTable('token', {
   id: serial('id').primaryKey(),
-  createdAt: timestamp('timestamp').defaultNow(),
-  updatedAt: timestamp('timestamp').defaultNow(),
+  createdAt: timestamp('createdAt').defaultNow(),
+  updatedAt: timestamp('updatedAt').defaultNow(),
   type: text('otp/api'),
   emailToken: text('emailtoken').notNull(),
   valid: boolean('valid').default(true),

@@ -3,14 +3,15 @@ import { integer, pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core';
 import { users } from './userschema';
 import { registration } from './registrationschema';
 import { profile } from './profileschema';
+
 export const member = pgTable('member', {
   id: serial('id').primaryKey(),
-  firstName: text('firstname'),
+  firstName: text('firstName'),
   lastName: text('lastName'),
-  email: text('emaol').notNull(),
+  email: text('email').notNull(),
   phoneNumber: text('phoheNumber'),
-  createdAt: timestamp('timestamp').defaultNow(),
-  updatedAt: timestamp('timestamp').defaultNow(),
+  createdAt: timestamp('createdAt').defaultNow(),
+  updatedAt: timestamp('updatedAt').defaultNow(),
   departmentName: text('departmentName'),
   userId: integer('userid'),
 });

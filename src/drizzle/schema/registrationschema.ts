@@ -4,9 +4,9 @@ import { event } from './eventschema';
 import { member } from './memberschema';
 export const registration = pgTable('registration', {
   id: serial('id').primaryKey(),
-  registrationStatus: text('regstatus'),
-  createdAt: timestamp('timestamp').defaultNow(),
-  updatedAt: timestamp('timestamp').defaultNow(),
+  registrationStatus: text('regstrationstatus'),
+  createdAt: timestamp('createdAt').defaultNow(),
+  updatedAt: timestamp('updatedAt').defaultNow(),
   eventId: integer('eventid'),
   memberId: integer('memberid'),
 });

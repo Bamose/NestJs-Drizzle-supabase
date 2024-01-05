@@ -31,7 +31,6 @@ import * as postgres from 'postgres';
             ...tokenschema,
           },
         });
-        /*   await migrate(db, { migrationsFolder: 'migration' }); */
         return db;
       },
     },

@@ -13,6 +13,8 @@ import {
 } from '@nestjs/common';
 import { users } from 'src/drizzle/schema/userschema';
 import { UsersService } from './users.service';
+import { Updateuserdto } from './userdto/updateuserdto';
+import { Createuserdto } from './userdto/createuserdto';
 
 @Controller('users')
 export class usersController {
@@ -23,27 +25,22 @@ export class usersController {
     return this.userService.findAll();
   }
 
-  /*   @Get('/:id')
-  async finduserById(@Param('id') id): Promise<user> {
-    return this.userService.finduserById(id);
+  @Get('/:id')
+  async finduserById(@Param('id') id) {
+    return this.userService.findUserById(id);
   }
 
   @Delete('/:id')
-  async deleteuserById(@Param('id') id): Promise<user[]> {
-    return this.userService.deleteuser(id);
-  }
-
-  @Patch('/:id')
-  async patchuserById(@Param('id') id, @Body() user: user): Promise<user[]> {
-    return this.userService.patchuser(id, user);
+  async deleteuserById(@Param('id') id) {
+    return this.userService.deleteUser(id);
   }
 
   @Put('/:id')
-  async updateuserById(@Param('id') id, @Body() user: user): Promise<user[]> {
-    return this.userService.updateuser(id, user);
+  async updateuserById(@Param('id') id, @Body() user: Updateuserdto) {
+    return this.userService.updateUser(id, user);
   }
   @Post()
-  async createuser(@Body() user: user): Promise<user[]> {
-    return this.userService.createuser(user);
-  } */
+  async createuser(@Body() user: Createuserdto) {
+    return this.userService.createUser(user);
+  }
 }

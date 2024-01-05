@@ -6,6 +6,7 @@ import {
   serial,
   text,
   time,
+  timestamp,
 } from 'drizzle-orm/pg-core';
 import { users } from './userschema';
 import { registration } from './registrationschema';
@@ -19,6 +20,8 @@ export const event = pgTable('event', {
   location: text('location'),
   organisedBy: text('organisedBy'),
   userId: integer('userId'),
+  createdAt: timestamp('createdAt').defaultNow(),
+  updatedAt: timestamp('updatedAt').defaultNow(),
 });
 
 export const eventRelations = relations(event, ({ one }) => ({
