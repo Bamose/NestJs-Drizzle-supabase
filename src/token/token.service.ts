@@ -1,9 +1,14 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { CreateTokenDto } from './dto/create-token.dto';
 import { UpdateTokenDto } from './dto/update-token.dto';
-
+import * as tokens from '../drizzle/schema/tokenschema';
+import { PG_CONNECTION } from '../../constants';
+import { NodePgDatabase } from 'drizzle-orm/node-postgres';
 @Injectable()
 export class TokenService {
+  constructor(
+    @Inject(PG_CONNECTION) private dbtokens: NodePgDatabase<typeof tokens>,
+  ) {}
   create(createTokenDto: CreateTokenDto) {
     return 'This action adds a new token';
   }
