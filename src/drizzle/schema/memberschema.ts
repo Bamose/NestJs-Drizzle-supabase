@@ -24,7 +24,7 @@ export const userRelation = relations(member, ({ one }) => ({
 }));
 
 export const registrationRelation = relations(member, ({ many }) => ({
-  member: many(registration),
+  member: many(registration, { relationName: 'memberregistration' }),
 }));
 
 export const profileRelations = relations(member, ({ one }) => ({

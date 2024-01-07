@@ -32,5 +32,5 @@ export const eventRelations = relations(event, ({ one }) => ({
 }));
 
 export const registrationRelations = relations(event, ({ many }) => ({
-  registration: many(registration),
+  eventregistration: many(registration, { relationName: 'eventregistration' }),
 }));

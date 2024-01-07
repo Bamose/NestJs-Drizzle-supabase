@@ -1,9 +1,13 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { CreateProfileDto } from './dto/create-profile.dto';
 import { UpdateProfileDto } from './dto/update-profile.dto';
-
-@Injectable()
+import { NodePgDatabase } from 'drizzle-orm/node-postgres';
+import { PG_CONNECTION } from '../../constants';
+import * as profiles from '../drizzle/schema/profileschema';
 export class ProfileService {
+  constructor(
+    @Inject(PG_CONNECTION) private dbprofiles: NodePgDatabase<typeof profiles>,
+  ) {}
   create(createProfileDto: CreateProfileDto) {
     return 'This action adds a new profile';
   }

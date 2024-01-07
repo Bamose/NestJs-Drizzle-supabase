@@ -14,7 +14,7 @@ export class DepartmentService {
   public async findAll() {
     return await this.dbdepartment.select().from(department);
   }
-  async create(name: string) {
+  async createdepartment(name: string) {
     await this.dbdepartment.insert(department).values({
       name: name,
     });

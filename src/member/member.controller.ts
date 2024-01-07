@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Put,
 } from '@nestjs/common';
 import { MemberService } from './member.service';
 import { CreateMemberDto } from './dto/create-member.dto';
@@ -21,8 +22,8 @@ export class MemberController {
   }
 
   @Get()
-  findAll() {
-    return this.memberService.findAll();
+  findAllmembers() {
+    return this.memberService.findAllmembers();
   }
 
   @Get(':id')
@@ -30,7 +31,7 @@ export class MemberController {
     return this.memberService.findOne(+id);
   }
 
-  @Patch(':id')
+  @Put(':id')
   update(@Param('id') id: string, @Body() updateMemberDto: UpdateMemberDto) {
     return this.memberService.update(+id, updateMemberDto);
   }

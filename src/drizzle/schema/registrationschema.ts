@@ -15,11 +15,11 @@ export const eventRelations = relations(registration, ({ one }) => ({
   event: one(event, {
     fields: [registration.eventId],
     references: [event.id],
+    relationName: 'eventregistration',
   }),
-}));
-export const memberRelations = relations(registration, ({ one }) => ({
-  event: one(member, {
+  member: one(member, {
     fields: [registration.memberId],
     references: [member.id],
+    relationName: 'memberregistration',
   }),
 }));
