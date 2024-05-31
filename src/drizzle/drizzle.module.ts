@@ -4,9 +4,9 @@ import { drizzle } from 'drizzle-orm/postgres-js';
 import { PG_CONNECTION } from '../../constants';
 import { migrate } from 'drizzle-orm/postgres-js/migrator';
 import * as userschema from './schema/userschema';
-import * as departmentschema from './schema/departmentschema';
+
 import * as eventschema from './schema/eventschema';
-import * as memberschema from './schema/memberschema';
+
 import * as profileschema from './schema/profileschema';
 import * as Registrationschema from './schema/registrationschema';
 import * as tokenschema from './schema/tokenschema';
@@ -23,9 +23,7 @@ import * as postgres from 'postgres';
         const db = drizzle(client, {
           schema: {
             ...userschema,
-            ...departmentschema,
             ...eventschema,
-            ...memberschema,
             ...profileschema,
             ...Registrationschema,
             ...tokenschema,

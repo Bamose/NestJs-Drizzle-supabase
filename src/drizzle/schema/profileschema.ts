@@ -1,10 +1,20 @@
-import { integer, pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core';
-import { member } from './memberschema';
+import {
+  integer,
+  pgTable,
+  serial,
+  text,
+  timestamp,
+  uuid,
+} from 'drizzle-orm/pg-core';
+
+import { sql } from 'drizzle-orm';
 
 export const profile = pgTable('profile', {
-  id: serial('id').primaryKey(),
+  id: uuid('id')
+    .primaryKey()
+    .default(sql`uuid_generate_v4()`)
+    .notNull(),
   bio: text('bio'),
   createdAt: timestamp('createdAt').defaultNow(),
   updatedAt: timestamp('updatedAt').defaultNow(),
-  memberId: integer('memberid').references(() => member.id),
 });

@@ -1,17 +1,20 @@
-import { relations } from 'drizzle-orm';
+import { relations, sql } from 'drizzle-orm';
 import {
   boolean,
   integer,
   pgTable,
-  serial,
   text,
   time,
   timestamp,
+  uuid,
 } from 'drizzle-orm/pg-core';
 import { users } from './userschema';
 
 export const token = pgTable('token', {
-  id: serial('id').primaryKey(),
+  id: uuid('id')
+    .primaryKey()
+    .default(sql`uuid_generate_v4()`)
+    .notNull(),
   createdAt: timestamp('createdAt').defaultNow(),
   updatedAt: timestamp('updatedAt').defaultNow(),
   type: text('otp/api'),

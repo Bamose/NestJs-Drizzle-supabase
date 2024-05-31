@@ -1,9 +1,12 @@
-import { relations } from 'drizzle-orm';
-import { pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core';
+import { relations, sql } from 'drizzle-orm';
+import { pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core';
 import { token } from './tokenschema';
 import { event } from './eventschema';
 export const users = pgTable('users', {
-  id: serial('id').primaryKey(),
+  id: uuid('id')
+    .primaryKey()
+    .default(sql`uuid_generate_v4()`)
+    .notNull(),
   name: text('name').notNull(),
   password: text('password').notNull(),
   email: text('email').unique().notNull(),

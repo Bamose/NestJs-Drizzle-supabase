@@ -17,7 +17,7 @@ export class UsersService {
     return await this.dbusers.select().from(users);
   }
 
-  public async findUserById(id: number) {
+  public async findUserById(id: string) {
     return await this.dbusers.query.users.findFirst({
       where: eq(users.id, id),
     });
@@ -34,7 +34,7 @@ export class UsersService {
     return this.findAll();
   }
 
-  public async updateUser(userid: number, userToEdit: Updateuserdto) {
+  public async updateUser(userid: string, userToEdit: Updateuserdto) {
     await this.dbusers
       .update(users)
       .set({
@@ -48,7 +48,7 @@ export class UsersService {
     return this.findAll();
   }
 
-  public async deleteUser(userid: number) {
+  public async deleteUser(userid: string) {
     await this.dbusers.delete(users).where(eq(users.id, userid));
     return this.findAll();
   }

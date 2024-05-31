@@ -1,36 +1,35 @@
-import { relations, sql } from 'drizzle-orm';
+import { sql } from 'drizzle-orm';
 import {
-  date,
   integer,
   pgTable,
   serial,
   text,
-  time,
   timestamp,
   uuid,
 } from 'drizzle-orm/pg-core';
-import { users } from './userschema';
-import { registration } from './registrationschema';
 
-export const event = pgTable('event', {
+export const ticket = pgTable('ticket', {
   id: uuid('id')
     .primaryKey()
     .default(sql`uuid_generate_v4()`)
     .notNull(),
-  eventName: text('eventname'),
-  description: text('description'),
-  date: date('date'),
-  time: time('time'),
-  location: text('location'),
-  organisedBy: text('organisedBy'),
-  userId: integer('userId'),
+  eventId: text('eventId'),
+  tickettype: text('ticketType'),
+  fullName: text('fullName'),
+  quantity: integer('quantity'),
+  price: integer('price'),
+  salesStartDate: text('salesStartDate'),
+  salesStartTime: text('salesStartTime'),
+  salesEndDate: text('salesEndDate'),
+  salesEndTime: text('salesEndTime'),
   createdAt: timestamp('createdAt').defaultNow(),
   updatedAt: timestamp('updatedAt').defaultNow(),
 });
 
-export const eventRelations = relations(event, ({ one }) => ({
+/* 
+export const ticketRelations = relations(ticket, ({ one }) => ({
   user: one(users, {
-    fields: [event.userId],
+    fields: [ticket.ticketId],
     references: [users.id],
   }),
 }));
@@ -38,3 +37,4 @@ export const eventRelations = relations(event, ({ one }) => ({
 export const registrationRelations = relations(event, ({ many }) => ({
   eventregistration: many(registration, { relationName: 'eventregistration' }),
 }));
+ */
