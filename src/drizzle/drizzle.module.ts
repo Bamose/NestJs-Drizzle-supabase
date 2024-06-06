@@ -5,10 +5,9 @@ import { PG_CONNECTION } from '../../constants';
 import * as userschema from './schema/userschema';
 import * as eventschema from './schema/eventschema';
 import * as profileschema from './schema/profileschema';
-import * as Registrationschema from './schema/registrationschema';
 import * as tokenschema from './schema/tokenschema';
 import * as postgres from 'postgres';
-
+import * as ticketschema from './schema/ticketschema';
 @Module({
   providers: [
     {
@@ -22,7 +21,7 @@ import * as postgres from 'postgres';
             ...userschema,
             ...eventschema,
             ...profileschema,
-            ...Registrationschema,
+            ...ticketschema,
             ...tokenschema,
           },
         });

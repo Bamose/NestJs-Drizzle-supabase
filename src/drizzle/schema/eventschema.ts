@@ -1,29 +1,29 @@
 import { relations, sql } from 'drizzle-orm';
 import {
+  boolean,
   date,
-  integer,
   pgTable,
-  serial,
   text,
   time,
   timestamp,
   uuid,
 } from 'drizzle-orm/pg-core';
 import { users } from './userschema';
-import { registration } from './registrationschema';
+import { ticket } from './ticketschema';
 
 export const event = pgTable('event', {
   id: uuid('id')
     .primaryKey()
     .default(sql`uuid_generate_v4()`)
     .notNull(),
+  userId: text('userId').notNull(),
   eventName: text('eventname'),
+  active: boolean('active'),
   description: text('description'),
   date: date('date'),
   time: time('time'),
   location: text('location'),
   organisedBy: text('organisedBy'),
-  userId: integer('userId'),
   createdAt: timestamp('createdAt').defaultNow(),
   updatedAt: timestamp('updatedAt').defaultNow(),
 });
@@ -35,6 +35,6 @@ export const eventRelations = relations(event, ({ one }) => ({
   }),
 }));
 
-export const registrationRelations = relations(event, ({ many }) => ({
-  eventregistration: many(registration, { relationName: 'eventregistration' }),
+export const ticketRelations = relations(event, ({ one }) => ({
+  eventticket: one(ticket),
 }));

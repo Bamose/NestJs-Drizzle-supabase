@@ -4,19 +4,18 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { DrizzleModule } from './drizzle/drizzle.module';
 import { UsersModule } from './users/users.module';
-import { APP_GUARD } from '@nestjs/core';
 import { EventModule } from './event/event.module';
-import { RegistrationModule } from './registration/registration.module';
 import { TokenModule } from './token/token.module';
 import { ProfileModule } from './profile/profile.module';
+import { AccessControlModule } from './token/shared/access.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     DrizzleModule,
     UsersModule,
+    AccessControlModule,
     EventModule,
-    RegistrationModule,
     TokenModule,
     ProfileModule,
   ],
