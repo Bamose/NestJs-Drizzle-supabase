@@ -38,18 +38,20 @@ export class AuthGuard implements CanActivate {
 
     const request = context.switchToHttp().getRequest();
     const Token = this.extractTokenFromHeader(request);
+    // console.log('token', Token);
     if (!Token) {
+      console.log('null');
       throw new UnauthorizedException();
     }
     try {
       const payload = await this.jwtService.verifyAsync(Token, {
         secret: process.env.JWT_SECRET || 'super secret',
       });
-
+      console.log(payload);
       const results = await this.dbtoken
         .select()
         .from(token)
-        .leftJoin(users, eq(token.userId, users.id))
+        .leftJoin(users, eq(token.userId, payload.userid))
         .where(eq(token.id, payload.tokenid))
         .execute();
 
