@@ -4,7 +4,6 @@ import {
   integer,
   pgTable,
   text,
-  time,
   timestamp,
   uuid,
 } from 'drizzle-orm/pg-core';
@@ -17,11 +16,11 @@ export const token = pgTable('token', {
     .notNull(),
   createdAt: timestamp('createdAt').defaultNow(),
   updatedAt: timestamp('updatedAt').defaultNow(),
-  type: text('otp/api'),
+  type: text('type').notNull(), // Changed from 'otp/api' to 'type'
   emailToken: text('emailtoken').notNull(),
-  valid: boolean('valid').default(true),
-  expiration: time('expiration'),
-  userId: integer('userid'),
+  valid: boolean('valid').default(true).notNull(),
+  expiration: timestamp('expiration').notNull(), // Changed from time to timestamp
+  userId: integer('userid').notNull(),
 });
 
 export const tokenRelations = relations(token, ({ one }) => ({

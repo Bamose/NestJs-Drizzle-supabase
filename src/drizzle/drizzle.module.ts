@@ -2,11 +2,8 @@ import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { drizzle } from 'drizzle-orm/postgres-js';
 import { PG_CONNECTION } from '../../constants';
-import { migrate } from 'drizzle-orm/postgres-js/migrator';
 import * as userschema from './schema/userschema';
-
 import * as eventschema from './schema/eventschema';
-
 import * as profileschema from './schema/profileschema';
 import * as Registrationschema from './schema/registrationschema';
 import * as tokenschema from './schema/tokenschema';

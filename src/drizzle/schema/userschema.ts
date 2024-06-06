@@ -15,6 +15,7 @@ export const users = pgTable('users', {
   createdAt: timestamp('createdAt').defaultNow(),
   updatedAt: timestamp('updatedAt').defaultNow(),
 });
+
 export const userRelations = relations(users, ({ many }) => ({
   token: many(token),
 }));
