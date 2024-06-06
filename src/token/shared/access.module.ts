@@ -1,8 +1,7 @@
-// accesscontrol.module.ts
 import { Module } from '@nestjs/common';
-import { AccessControlService } from './accesscontrol'; // Corrected the service name
+import { AccessControlService } from './accesscontrol';
 
 @Module({
   providers: [AccessControlService],
 })
-export class AccessControlModule {} // Corrected the module name
+export class AccessControlModule {}

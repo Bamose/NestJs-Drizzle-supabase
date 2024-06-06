@@ -1,34 +1,43 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { TokenService } from './token.service';
-import { CreateTokenDto } from './dto/create-token.dto';
-import { UpdateTokenDto } from './dto/update-token.dto';
+import {
+  Controller,
+  Post,
+  Body,
+  HttpException,
+  HttpStatus,
+  Res,
+} from '@nestjs/common';
+import { Response } from 'express';
+import { ApiTags } from '@nestjs/swagger';
+import { AuthService } from './token.service';
+import { Public } from './setmetadata';
+import { Createuserdto } from 'src/users/userdto/createuserdto';
 
-@Controller('token')
-export class TokenController {
-  constructor(private readonly tokenService: TokenService) {}
+@ApiTags('Authentication')
+@Controller('auth')
+export class AuthController {
+  constructor(private readonly authService: AuthService) {}
 
-  @Post()
-  create(@Body() createTokenDto: CreateTokenDto) {
-    return this.tokenService.create(createTokenDto);
+  @Public()
+  @Post('/signup')
+  async register(@Body() NewUser: Createuserdto, @Res() res: Response) {
+    try {
+      const accessToken = await this.authService.createUser(NewUser);
+      res.status(200).json(accessToken);
+    } catch (error) {
+      throw new HttpException(error, HttpStatus.BAD_REQUEST);
+    }
   }
-
-  @Get()
-  findAll() {
-    return this.tokenService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.tokenService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateTokenDto: UpdateTokenDto) {
-    return this.tokenService.update(+id, updateTokenDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.tokenService.remove(+id);
+  @Public()
+  @Post('/login')
+  async login(@Body() NewUser: Createuserdto, @Res() res: Response) {
+    try {
+      const accessToken = await this.authService.authenticateUser(
+        NewUser.email,
+        NewUser.password,
+      );
+      res.status(200).json(accessToken);
+    } catch (error) {
+      throw new HttpException(error, HttpStatus.UNAUTHORIZED);
+    }
   }
 }

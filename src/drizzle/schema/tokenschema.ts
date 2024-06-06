@@ -1,12 +1,5 @@
 import { relations, sql } from 'drizzle-orm';
-import {
-  boolean,
-  integer,
-  pgTable,
-  text,
-  timestamp,
-  uuid,
-} from 'drizzle-orm/pg-core';
+import { boolean, pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core';
 import { users } from './userschema';
 
 export const token = pgTable('token', {
@@ -16,11 +9,11 @@ export const token = pgTable('token', {
     .notNull(),
   createdAt: timestamp('createdAt').defaultNow(),
   updatedAt: timestamp('updatedAt').defaultNow(),
-  type: text('type').notNull(), // Changed from 'otp/api' to 'type'
+  type: text('type').notNull(),
   emailToken: text('emailtoken').notNull(),
   valid: boolean('valid').default(true).notNull(),
-  expiration: timestamp('expiration').notNull(), // Changed from time to timestamp
-  userId: integer('userid').notNull(),
+  expiration: timestamp('expiration').notNull(),
+  userId: text('userid').notNull(),
 });
 
 export const tokenRelations = relations(token, ({ one }) => ({

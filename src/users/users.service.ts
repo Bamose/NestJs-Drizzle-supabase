@@ -29,7 +29,6 @@ export class UsersService {
       password: NewUser.password,
       email: NewUser.email,
       role: NewUser.role,
-      member: NewUser.member,
     });
     return this.findAll();
   }
