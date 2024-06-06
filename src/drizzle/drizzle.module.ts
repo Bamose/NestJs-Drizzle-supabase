@@ -16,7 +16,7 @@ import * as postgres from 'postgres';
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) => {
         const connectionString = configService.get<string>('DATABASE_URL');
-        const client = postgres(connectionString);
+        const client = postgres(connectionString, { prepare: false });
         const db = drizzle(client, {
           schema: {
             ...userschema,

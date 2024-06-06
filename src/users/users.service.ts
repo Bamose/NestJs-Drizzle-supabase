@@ -25,7 +25,7 @@ export class UsersService {
 
   public async createUser(NewUser: Createuserdto) {
     await this.dbusers.insert(users).values({
-      name: NewUser.username,
+      name: NewUser.name,
       password: NewUser.password,
       email: NewUser.email,
       role: NewUser.role,
@@ -41,7 +41,6 @@ export class UsersService {
         password: userToEdit.password,
         email: userToEdit.email,
         role: userToEdit.role,
-        member: userToEdit.member,
       })
       .where(eq(users.id, userid));
     return this.findAll();

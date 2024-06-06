@@ -47,14 +47,14 @@ export class AuthService {
     const [newUser] = await this.db
       .insert(users)
       .values({
-        name: NewUser.username,
+        name: NewUser.name,
         password: NewUser.password,
         email: NewUser.email,
         role: NewUser.role,
       })
       .returning({ id: users.id })
       .execute();
-    await this.generateJwtToken(newUser.id);
+    return await this.generateJwtToken(newUser.id);
   }
 
   private async generateJwtToken(userId: string) {
@@ -68,7 +68,7 @@ export class AuthService {
       new Date().getTime() + 24 * 60 * 60 * 1000 * 365,
     );
 
-    const apiToken = await this.db
+    const [apiToken] = await this.db
       .insert(tokens.token)
       .values({
         type: 'API',
@@ -79,12 +79,16 @@ export class AuthService {
       })
       .returning({ id: tokens.token.id })
       .execute();
-
     const payload = { tokenid: apiToken[0].id, userid: userId };
-    console.log(payload);
+    const authToken = await this.jwtService.signAsync(payload);
 
+    await this.db
+      .update(tokens.token)
+      .set({ emailToken: authToken })
+      .where(eq(tokens.token.id, apiToken.id))
+      .execute();
     return {
-      authToken: await this.jwtService.signAsync(payload),
+      authToken,
     };
   }
 }
