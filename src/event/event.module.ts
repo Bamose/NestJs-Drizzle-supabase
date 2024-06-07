@@ -16,7 +16,6 @@ import { AccessControlService } from 'src/token/shared/accesscontrol';
       provide: APP_GUARD,
       useClass: AuthGuard,
     },
-    EventService,
     AccessControlService,
   ],
   imports: [DrizzleModule, TokenModule, AccessControlModule],

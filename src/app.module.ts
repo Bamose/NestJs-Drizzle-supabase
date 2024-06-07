@@ -8,6 +8,7 @@ import { EventModule } from './event/event.module';
 import { TokenModule } from './token/token.module';
 import { ProfileModule } from './profile/profile.module';
 import { AccessControlModule } from './token/shared/access.module';
+import { TicketModule } from './ticket/ticket.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { AccessControlModule } from './token/shared/access.module';
     EventModule,
     TokenModule,
     ProfileModule,
+    TicketModule,
   ],
   controllers: [AppController],
   providers: [AppService],
