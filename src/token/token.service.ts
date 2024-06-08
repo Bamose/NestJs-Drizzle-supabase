@@ -37,6 +37,7 @@ export class AuthService {
     if (!isPasswordValid) {
       throw new Error('Invalid password');
     }
+    console.log('login successfull');
     return await this.generateJwtToken(existinguser.id);
   }
 
@@ -45,13 +46,14 @@ export class AuthService {
       const [newUser] = await this.db
         .insert(users)
         .values({
-          name: NewUser.name,
+          userName: NewUser.userName,
           password: await bcrypt.hash(NewUser.password, 10), // Hash password
           email: NewUser.email,
           role: NewUser.role,
         })
         .returning({ id: users.id })
         .execute();
+      console.log('user created');
       return await this.generateJwtToken(newUser.id);
     } catch (e) {
       console.error('Error creating user:', e);

@@ -21,16 +21,19 @@ export class AuthController {
   @Post('/signup')
   async register(@Body() NewUser: Createuserdto, @Res() res: Response) {
     try {
+      console.log(NewUser);
       const accessToken = await this.authService.createUser(NewUser);
       res.status(200).json(accessToken);
     } catch (error) {
       throw new HttpException(error, HttpStatus.BAD_REQUEST);
     }
   }
+
   @Public()
   @Post('/login')
   async login(@Body() NewUser: Createuserdto, @Res() res: Response) {
     try {
+      console.log(NewUser)
       const accessToken = await this.authService.authenticateUser(
         NewUser.email,
         NewUser.password,

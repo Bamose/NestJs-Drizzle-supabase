@@ -1,5 +1,12 @@
 import { relations, sql } from 'drizzle-orm';
-import { boolean, pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core';
+import {
+  boolean,
+  jsonb,
+  pgTable,
+  text,
+  timestamp,
+  uuid,
+} from 'drizzle-orm/pg-core';
 import { users } from './userschema';
 import { ticket } from './ticketschema';
 
@@ -11,7 +18,8 @@ export const event = pgTable('event', {
   userId: text('userId').notNull(),
   eventName: text('eventName'),
   active: boolean('active'),
-  description: text('description'),
+  description: jsonb('description'),
+  summary: text('summary'),
   date: text('date'),
   time: text('time'),
   image: text('image'),
