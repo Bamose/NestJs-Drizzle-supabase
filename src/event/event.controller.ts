@@ -11,6 +11,7 @@ import { EventService } from './event.service';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
 import { User } from 'src/token/decorators/user.decorator';
+import { Public } from 'src/token/setmetadata';
 @Controller('event')
 export class EventController {
   constructor(private readonly eventService: EventService) {}

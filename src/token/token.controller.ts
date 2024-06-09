@@ -33,7 +33,7 @@ export class AuthController {
   @Post('/login')
   async login(@Body() NewUser: Createuserdto, @Res() res: Response) {
     try {
-      console.log(NewUser)
+      console.log(NewUser);
       const accessToken = await this.authService.authenticateUser(
         NewUser.email,
         NewUser.password,

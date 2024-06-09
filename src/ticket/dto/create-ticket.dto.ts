@@ -2,8 +2,8 @@ export class CreateTicketDto {
   eventId: string;
   ticketType: string;
   fullName: string;
-  quantity: number;
-  price: number;
+  quantity: string;
+  price: string;
   salesStartDate: string;
   salesStartTime: string;
   salesEndDate: string;

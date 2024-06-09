@@ -19,21 +19,22 @@ export class TicketService {
       .values({
         userId,
         eventId: createTicketDto.eventId,
-        salesEndDate: createTicketDto.salesEndTime,
+        salesEndDate: createTicketDto.salesEndDate,
         salesStartDate: createTicketDto.salesStartDate,
         salesEndTime: createTicketDto.salesEndTime,
         salesStartTime: createTicketDto.salesStartTime,
         fullName: createTicketDto.fullName,
-        quantity: createTicketDto.quantity,
-        price: createTicketDto.price,
+        quantity: Number(createTicketDto.quantity),
+        price: Number(createTicketDto.price),
         ticketType: createTicketDto.ticketType,
       })
       .returning({ id: tickets.ticket.id })
       .execute();
-    return await this.dbevents
+    await this.dbevents
       .update(events.event)
       .set({ active: true })
       .where(eq(events.event.id, createTicketDto.eventId));
+    return { ticket: 'success' };
   }
 
   findAll() {

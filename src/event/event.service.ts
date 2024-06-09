@@ -12,24 +12,30 @@ export class EventService {
 
   async create(userid: string, createEventDto: CreateEventDto) {
     console.log(createEventDto);
-    if (!createEventDto) {
-      return 'error';
+
+    try {
+      if (!createEventDto) {
+        return 'error';
+      }
+      const [event] = await this.dbevents
+        .insert(events.event)
+        .values({
+          eventName: createEventDto.eventName,
+          description: createEventDto.description,
+          time: createEventDto.time,
+          location: createEventDto.location,
+          organisedBy: createEventDto.organisedBy,
+          active: false,
+          date: createEventDto.date,
+          userId: userid,
+        })
+        .returning({ id: events.event.id })
+        .execute();
+      return { eventId: event.id };
+    } catch (e) {
+      console.log(e);
+      return e;
     }
-    await this.dbevents
-      .insert(events.event)
-      .values({
-        eventName: createEventDto.eventName,
-        description: createEventDto.description,
-        time: createEventDto.time,
-        location: createEventDto.location,
-        organisedBy: createEventDto.organisedBy,
-        active: false,
-        date: createEventDto.date,
-        userId: userid,
-      })
-      .returning({ id: events.event.id })
-      .execute();
-    return 'This action adds a new event';
   }
 
   findAll() {
