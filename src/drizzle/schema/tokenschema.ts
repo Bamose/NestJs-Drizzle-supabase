@@ -7,18 +7,18 @@ export const token = pgTable('token', {
     .primaryKey()
     .default(sql`uuid_generate_v4()`)
     .notNull(),
-  createdAt: timestamp('createdAt').defaultNow(),
-  updatedAt: timestamp('updatedAt').defaultNow(),
+  createdat: timestamp('createdat').defaultNow(),
+  updatedat: timestamp('updatedat').defaultNow(),
   type: text('type').notNull(),
-  emailToken: text('emailtoken').notNull(),
+  emailtoken: text('emailtoken').notNull(),
   valid: boolean('valid').default(true).notNull(),
   expiration: timestamp('expiration').notNull(),
-  userId: text('userid').notNull(),
+  userid: text('userid').notNull(),
 });
 
 export const tokenRelations = relations(token, ({ one }) => ({
   user: one(users, {
-    fields: [token.userId],
+    fields: [token.userid],
     references: [users.id],
   }),
 }));

@@ -15,8 +15,8 @@ export const event = pgTable('event', {
     .primaryKey()
     .default(sql`uuid_generate_v4()`)
     .notNull(),
-  userId: text('userId').notNull(),
-  eventName: text('eventName'),
+  userid: text('userid').notNull(),
+  eventname: text('eventname'),
   active: boolean('active'),
   description: jsonb('description'),
   summary: text('summary'),
@@ -24,14 +24,14 @@ export const event = pgTable('event', {
   time: text('time'),
   image: text('image'),
   location: text('location'),
-  organisedBy: text('organisedBy'),
-  createdAt: timestamp('createdAt').defaultNow(),
-  updatedAt: timestamp('updatedAt').defaultNow(),
+  organisedby: text('organisedby'),
+  createdat: timestamp('createdat').defaultNow(),
+  updatedat: timestamp('updatedat').defaultNow(),
 });
 
 export const eventRelations = relations(event, ({ one }) => ({
   user: one(users, {
-    fields: [event.userId],
+    fields: [event.userid],
     references: [users.id],
   }),
 }));

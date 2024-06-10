@@ -25,7 +25,7 @@ export class UsersService {
 
   public async createUser(NewUser: Createuserdto) {
     await this.dbusers.insert(users).values({
-      userName: NewUser.userName,
+      username: NewUser.username,
       password: NewUser.password,
       email: NewUser.email,
       role: NewUser.role,
@@ -37,7 +37,7 @@ export class UsersService {
     await this.dbusers
       .update(users)
       .set({
-        userName: userToEdit.username,
+        username: userToEdit.username,
         password: userToEdit.password,
         email: userToEdit.email,
         role: userToEdit.role,

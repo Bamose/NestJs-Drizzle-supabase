@@ -46,7 +46,7 @@ export class AuthService {
       const [newUser] = await this.db
         .insert(users)
         .values({
-          userName: NewUser.userName,
+          username: NewUser.username,
           password: await bcrypt.hash(NewUser.password, 10), // Hash password
           email: NewUser.email,
           role: NewUser.role,
@@ -61,12 +61,12 @@ export class AuthService {
     }
   }
 
-  private async generateJwtToken(userId: string) {
+  private async generateJwtToken(userid: string) {
     try {
       await this.db
         .update(tokens.token)
         .set({ valid: false })
-        .where(eq(tokens.token.userId, userId))
+        .where(eq(tokens.token.userid, userid))
         .execute();
 
       const expiration = new Date(
@@ -78,9 +78,9 @@ export class AuthService {
         .values({
           type: 'API',
           expiration,
-          userId,
+          userid,
           valid: true,
-          emailToken: '',
+          emailtoken: '',
         })
         .returning({ id: tokens.token.id })
         .execute();
@@ -89,12 +89,12 @@ export class AuthService {
         throw new Error('Failed to generate API token');
       }
 
-      const payload = { tokenid: apiToken.id, userid: userId };
+      const payload = { tokenid: apiToken.id, userid: userid };
       const authToken = await this.jwtService.signAsync(payload);
 
       await this.db
         .update(tokens.token)
-        .set({ emailToken: authToken })
+        .set({ emailtoken: authToken })
         .where(eq(tokens.token.id, apiToken.id))
         .execute();
 

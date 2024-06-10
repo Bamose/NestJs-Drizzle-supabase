@@ -13,28 +13,28 @@ export class TicketService {
     @Inject(PG_CONNECTION) private dbtickets: NodePgDatabase<typeof tickets>,
     @Inject(PG_CONNECTION) private dbevents: NodePgDatabase<typeof events>,
   ) {}
-  async create(userId: string, createTicketDto: CreateTicketDto) {
-    await this.dbtickets
+  async create(userid: string, createTicketDto: CreateTicketDto) {
+    const tick = await this.dbtickets
       .insert(tickets.ticket)
       .values({
-        userId,
-        eventId: createTicketDto.eventId,
-        salesEndDate: createTicketDto.salesEndDate,
-        salesStartDate: createTicketDto.salesStartDate,
-        salesEndTime: createTicketDto.salesEndTime,
-        salesStartTime: createTicketDto.salesStartTime,
-        fullName: createTicketDto.fullName,
+        userid,
+        eventid: createTicketDto.eventid,
+        salesenddate: createTicketDto.salesenddate,
+        salesstartdate: createTicketDto.salesstartdate,
+        salesendtime: createTicketDto.salesendtime,
+        salesstarttime: createTicketDto.salesstarttime,
+        fullname: createTicketDto.fullname,
         quantity: Number(createTicketDto.quantity),
         price: Number(createTicketDto.price),
-        ticketType: createTicketDto.ticketType,
+        tickettype: createTicketDto.tickettype,
       })
-      .returning({ id: tickets.ticket.id })
-      .execute();
+      .returning({ id: tickets.ticket.id });
+
     await this.dbevents
       .update(events.event)
       .set({ active: true })
-      .where(eq(events.event.id, createTicketDto.eventId));
-    return { ticket: 'success' };
+      .where(eq(events.event.id, createTicketDto.eventid));
+    return { ticket: tick };
   }
 
   findAll() {

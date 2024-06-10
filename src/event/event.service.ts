@@ -4,6 +4,7 @@ import { UpdateEventDto } from './dto/update-event.dto';
 import { NodePgDatabase } from 'drizzle-orm/node-postgres';
 import { PG_CONNECTION } from '../../constants';
 import * as events from '../drizzle/schema/eventschema';
+import { eq } from 'drizzle-orm';
 @Injectable()
 export class EventService {
   constructor(
@@ -20,14 +21,16 @@ export class EventService {
       const [event] = await this.dbevents
         .insert(events.event)
         .values({
-          eventName: createEventDto.eventName,
+          eventname: createEventDto.eventname,
           description: createEventDto.description,
           time: createEventDto.time,
+          summary: createEventDto.summary,
+          image: createEventDto.image,
           location: createEventDto.location,
-          organisedBy: createEventDto.organisedBy,
+          organisedby: createEventDto.organisedby,
           active: false,
           date: createEventDto.date,
-          userId: userid,
+          userid: userid,
         })
         .returning({ id: events.event.id })
         .execute();
@@ -38,12 +41,46 @@ export class EventService {
     }
   }
 
-  findAll() {
-    return `This action returns all event`;
+  async findAll() {
+    const data = await this.dbevents
+      .select({
+        id: events.event.id,
+        eventname: events.event.eventname,
+        description: events.event.description,
+        summary: events.event.summary,
+        image: events.event.image,
+        time: events.event.time,
+        location: events.event.location,
+        organisedby: events.event.organisedby,
+        active: events.event.active,
+        date: events.event.date,
+        userid: events.event.userid,
+      })
+      .from(events.event);
+    // .where(eq(events.event.active, true))
+
+    return data;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} event`;
+  async findOne(id: string) {
+    const data = await this.dbevents
+      .select({
+        id: events.event.id,
+        eventname: events.event.eventname,
+        description: events.event.description,
+        summary: events.event.summary,
+        image: events.event.image,
+        time: events.event.time,
+        location: events.event.location,
+        organisedby: events.event.organisedby,
+        active: events.event.active,
+        date: events.event.date,
+        userid: events.event.userid,
+      })
+      .from(events.event)
+      .where(eq(events.event.id, id));
+
+    return data;
   }
 
   update(id: number, updateEventDto: UpdateEventDto) {

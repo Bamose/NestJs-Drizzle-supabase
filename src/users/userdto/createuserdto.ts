@@ -1,5 +1,5 @@
 export class Createuserdto {
-  public userName: string;
+  public username: string;
   public password: string;
   public email: string;
   public role: string;

@@ -8,12 +8,12 @@ export const users = pgTable('users', {
     .primaryKey()
     .default(sql`uuid_generate_v4()`)
     .notNull(),
-  userName: text('userName').notNull(),
+  username: text('username').notNull(),
   password: text('password').notNull(),
   email: text('email').unique().notNull(),
-  role: text('roles'),
-  createdAt: timestamp('createdAt').defaultNow(),
-  updatedAt: timestamp('updatedAt').defaultNow(),
+  role: text('role'),
+  createdAt: timestamp('createdat').defaultNow(),
+  updatedAt: timestamp('updatedat').defaultNow(),
 });
 
 export const userRelations = relations(users, ({ many }) => ({

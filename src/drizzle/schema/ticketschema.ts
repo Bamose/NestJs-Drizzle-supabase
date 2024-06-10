@@ -16,23 +16,23 @@ export const ticket = pgTable('ticket', {
     .primaryKey()
     .default(sql`uuid_generate_v4()`)
     .notNull(),
-  eventId: text('eventId').references(() => event.id),
-  userId: text('userId'),
-  ticketType: text('ticketType'),
-  fullName: text('fullName'),
+  eventid: text('eventid').references(() => event.id),
+  userid: text('userid'),
+  tickettype: text('tickettype'),
+  fullname: text('fullname'),
   quantity: integer('quantity'),
   price: integer('price'),
-  salesStartDate: date('salesStartDate'),
-  salesStartTime: time('salesStartTime'),
-  salesEndDate: date('salesEndDate'),
-  salesEndTime: time('salesEndTime'),
-  createdAt: timestamp('createdAt').defaultNow(),
-  updatedAt: timestamp('updatedAt').defaultNow(),
+  salesstartdate: date('salesstartdate'),
+  salesstarttime: time('salesstarttime'),
+  salesenddate: date('salesenddate'),
+  salesendtime: time('salesendtime'),
+  createdat: timestamp('createdat').defaultNow(),
+  updatedat: timestamp('updatedat').defaultNow(),
 });
 
 export const ticketRelations = relations(ticket, ({ one }) => ({
   user: one(users, {
-    fields: [ticket.userId],
+    fields: [ticket.userid],
     references: [users.id],
   }),
 }));

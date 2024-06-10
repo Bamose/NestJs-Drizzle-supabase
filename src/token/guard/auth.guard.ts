@@ -51,7 +51,7 @@ export class AuthGuard implements CanActivate {
       const results = await this.dbtoken
         .select()
         .from(token)
-        .leftJoin(users, eq(token.userId, payload.userid))
+        .leftJoin(users, eq(token.userid, payload.userid))
         .where(eq(token.id, payload.tokenid))
         .execute();
 
