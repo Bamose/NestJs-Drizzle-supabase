@@ -63,7 +63,7 @@ export class EventService {
   }
 
   async findOne(id: string) {
-    const data = await this.dbevents
+    const [data] = await this.dbevents
       .select({
         id: events.event.id,
         eventname: events.event.eventname,

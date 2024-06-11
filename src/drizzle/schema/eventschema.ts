@@ -9,6 +9,7 @@ import {
 } from 'drizzle-orm/pg-core';
 import { users } from './userschema';
 import { ticket } from './ticketschema';
+import { register } from './registerschema';
 
 export const event = pgTable('event', {
   id: uuid('id')
@@ -38,4 +39,7 @@ export const eventRelations = relations(event, ({ one }) => ({
 
 export const ticketRelations = relations(event, ({ one }) => ({
   eventticket: one(ticket),
+}));
+export const registerRelations = relations(event, ({ one }) => ({
+  eventregister: one(register),
 }));

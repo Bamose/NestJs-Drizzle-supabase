@@ -9,6 +9,7 @@ import { TokenModule } from './token/token.module';
 import { ProfileModule } from './profile/profile.module';
 import { AccessControlModule } from './token/shared/access.module';
 import { TicketModule } from './ticket/ticket.module';
+import { RegistrationModule } from './registration/registration.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { TicketModule } from './ticket/ticket.module';
     TokenModule,
     ProfileModule,
     TicketModule,
+    RegistrationModule,
   ],
   controllers: [AppController],
   providers: [AppService],

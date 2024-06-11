@@ -6,6 +6,7 @@ import * as userschema from './schema/userschema';
 import * as eventschema from './schema/eventschema';
 import * as profileschema from './schema/profileschema';
 import * as tokenschema from './schema/tokenschema';
+import * as registerschema from './schema/registerschema';
 import * as postgres from 'postgres';
 import * as ticketschema from './schema/ticketschema';
 import { Client, Pool } from 'pg';
@@ -31,6 +32,7 @@ import { Client, Pool } from 'pg';
             ...profileschema,
             ...ticketschema,
             ...tokenschema,
+            ...registerschema,
           },
         });
         return db;
