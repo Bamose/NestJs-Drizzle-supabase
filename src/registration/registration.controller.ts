@@ -24,14 +24,9 @@ export class RegistrationController {
     return this.registrationService.create(user.id, createRegistrationDto);
   }
 
-  @Get()
-  findAll() {
-    return this.registrationService.findAll();
-  }
-
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.registrationService.findOne(+id);
+  findAll(@Param('id') id: string) {
+    return this.registrationService.findAll(id);
   }
 
   @Delete(':id')

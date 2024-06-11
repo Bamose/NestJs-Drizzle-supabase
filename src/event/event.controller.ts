@@ -24,6 +24,11 @@ export class EventController {
 
   @Public()
   @Get()
+  findEvents() {
+    return this.eventService.findAllActive();
+  }
+
+  @Get('allevents')
   findAll() {
     return this.eventService.findAll();
   }

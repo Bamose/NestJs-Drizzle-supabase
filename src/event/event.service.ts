@@ -4,6 +4,7 @@ import { UpdateEventDto } from './dto/update-event.dto';
 import { NodePgDatabase } from 'drizzle-orm/node-postgres';
 import { PG_CONNECTION } from '../../constants';
 import * as events from '../drizzle/schema/eventschema';
+import * as tickets from '../drizzle/schema/ticketschema';
 import { eq } from 'drizzle-orm';
 @Injectable()
 export class EventService {
@@ -41,6 +42,28 @@ export class EventService {
     }
   }
 
+  async findAllActive() {
+    const data = await this.dbevents
+      .select({
+        id: events.event.id,
+        eventname: events.event.eventname,
+        description: events.event.description,
+        summary: events.event.summary,
+        image: events.event.image,
+        time: events.event.time,
+        location: events.event.location,
+        organisedby: events.event.organisedby,
+        active: events.event.active,
+        date: events.event.date,
+        userid: events.event.userid,
+        tickettype: tickets.ticket.tickettype,
+      })
+      .from(events.event)
+      .leftJoin(tickets.ticket, eq(events.event.id, tickets.ticket.eventid))
+      .where(eq(events.event.active, true));
+
+    return data;
+  }
   async findAll() {
     const data = await this.dbevents
       .select({
@@ -57,7 +80,6 @@ export class EventService {
         userid: events.event.userid,
       })
       .from(events.event);
-    // .where(eq(events.event.active, true))
 
     return data;
   }

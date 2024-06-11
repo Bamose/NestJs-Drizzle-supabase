@@ -8,6 +8,8 @@ import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from 'src/token/guard/auth.guard';
 import { AccessControlService } from 'src/token/shared/accesscontrol';
 import { EventService } from 'src/event/event.service';
+import { EventModule } from 'src/event/event.module';
+import { UsersModule } from 'src/users/users.module';
 
 @Module({
   controllers: [RegistrationController],
@@ -21,6 +23,12 @@ import { EventService } from 'src/event/event.service';
 
     AccessControlService,
   ],
-  imports: [DrizzleModule, TokenModule, AccessControlModule],
+  imports: [
+    DrizzleModule,
+    TokenModule,
+    AccessControlModule,
+    EventModule,
+    UsersModule,
+  ],
 })
 export class RegistrationModule {}

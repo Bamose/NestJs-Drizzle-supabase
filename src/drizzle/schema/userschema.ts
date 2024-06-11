@@ -3,6 +3,7 @@ import { pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core';
 import { token } from './tokenschema';
 import { event } from './eventschema';
 import { ticket } from './ticketschema';
+import { register } from './registerschema';
 export const users = pgTable('users', {
   id: uuid('id')
     .primaryKey()
@@ -18,6 +19,9 @@ export const users = pgTable('users', {
 
 export const userRelations = relations(users, ({ many }) => ({
   token: many(token),
+}));
+export const regisRelations = relations(users, ({ many }) => ({
+  token: many(register),
 }));
 
 export const eventRelations = relations(users, ({ many }) => ({
