@@ -22,7 +22,6 @@ export class EventController {
     return this.eventService.create(user.id, createEventDto);
   }
 
-  @Public()
   @Get()
   findEvents() {
     return this.eventService.findAllActive();
